@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "771022163482",
+    "project_id": "pet-stories-78efb",
+    "storage_bucket": "pet-stories-78efb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771022163482:android:1be1008d31b3bdd9bd4ba3",
+        "android_client_info": {
+          "package_name": "com.example.nam_training"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771022163482-o09t0k8ggo3m4mjduks4clea3gmc50sf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nam_training",
+            "certificate_hash": "ee2fe8a060389b0b759495a65a05198b2ca87ea2"
+          }
+        },
+        {
+          "client_id": "771022163482-h7be1imalpgjkqfmb03odj5kkgg36shp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4o8-M8j_wqWXQtgpt7Fr4SnJTDHlhfuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771022163482-h7be1imalpgjkqfmb03odj5kkgg36shp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
