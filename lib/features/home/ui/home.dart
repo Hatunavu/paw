@@ -96,121 +96,127 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: IndexedStack(
           index: _selectedIndex,
           children: tabs,
         ),
-        bottomNavigationBar: Container(
-          height: 50,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                  top: BorderSide(
-                      color: Colors.grey.withOpacity(0.5), width: 0.1))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                  icon: Icon(
-                    _selectedIndex == 0 ? CustomIcons.home_1 : CustomIcons.home,
-                    size: 20,
-                    color: secondBlack,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _selectedIndex = 0;
-                    });
-                  }),
-              IconButton(
-                  icon: Icon(
-                    _selectedIndex == 1
-                        ? CustomIcons.search_1
-                        : CustomIcons.search,
-                    size: 20,
-                    color: secondBlack,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _selectedIndex = 1;
-                    });
-                  }),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    _selectedIndex = 2;
-                  });
-                },
-                child: Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(13)),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-              ),
-              // IconButton(
-              //     icon: Icon(
-              //       CustomIcons.add,
-              //       size: 30,
-              //       color: primaryColor,
-              //     ),
-              //     onPressed: () {
-              //       setState(() {
-              //         _selectedIndex = 2;
-              //       });
-              //     }),
-              BlocBuilder<ProfileCubit, ProfileState>(
-                  builder: (context, profileState) {
-                if (profileState is ProfileStateSuccess) {
-                  final read = profileState.userr.unreadNoti == 0;
-                  return IconButton(
-                      icon: Icon(
-                        _selectedIndex == 3
-                            ? CustomIcons.favorite_1
-                            : read
-                                ? CustomIcons.favorite
-                                : CustomIcons.favorite_1,
-                        size: 20,
-                        color: read ? secondBlack : Colors.red,
-                      ),
-                      onPressed: () {
-                        _profileCubit.readNoti();
-                        setState(() {
-                          _selectedIndex = 3;
-                        });
-                      });
-                }
-                return IconButton(
+        bottomNavigationBar: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                    top: BorderSide(
+                        color: Colors.grey.withOpacity(0.5), width: 0.1))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
                     icon: Icon(
-                      _selectedIndex == 3
-                          ? CustomIcons.favorite_1
-                          : CustomIcons.favorite,
+                      _selectedIndex == 0
+                          ? CustomIcons.home_1
+                          : CustomIcons.home,
                       size: 20,
                       color: secondBlack,
                     ),
                     onPressed: () {
                       setState(() {
-                        _selectedIndex = 3;
+                        _selectedIndex = 0;
                       });
-                    });
-              }),
-              IconButton(
-                  icon: Icon(
-                    _selectedIndex == 4 ? CustomIcons.user_1 : CustomIcons.user,
-                    size: 20,
-                    color: secondBlack,
-                  ),
-                  onPressed: () {
+                    }),
+                IconButton(
+                    icon: Icon(
+                      _selectedIndex == 1
+                          ? CustomIcons.search_1
+                          : CustomIcons.search,
+                      size: 20,
+                      color: secondBlack,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _selectedIndex = 1;
+                      });
+                    }),
+                InkWell(
+                  onTap: () {
                     setState(() {
-                      _selectedIndex = 4;
+                      _selectedIndex = 2;
                     });
-                  }),
-            ],
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: BorderRadius.circular(13)),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+                // IconButton(
+                //     icon: Icon(
+                //       CustomIcons.add,
+                //       size: 30,
+                //       color: primaryColor,
+                //     ),
+                //     onPressed: () {
+                //       setState(() {
+                //         _selectedIndex = 2;
+                //       });
+                //     }),
+                BlocBuilder<ProfileCubit, ProfileState>(
+                    builder: (context, profileState) {
+                  if (profileState is ProfileStateSuccess) {
+                    final read = profileState.userr.unreadNoti == 0;
+                    return IconButton(
+                        icon: Icon(
+                          _selectedIndex == 3
+                              ? CustomIcons.favorite_1
+                              : read
+                                  ? CustomIcons.favorite
+                                  : CustomIcons.favorite_1,
+                          size: 20,
+                          color: read ? secondBlack : Colors.red,
+                        ),
+                        onPressed: () {
+                          _profileCubit.readNoti();
+                          setState(() {
+                            _selectedIndex = 3;
+                          });
+                        });
+                  }
+                  return IconButton(
+                      icon: Icon(
+                        _selectedIndex == 3
+                            ? CustomIcons.favorite_1
+                            : CustomIcons.favorite,
+                        size: 20,
+                        color: secondBlack,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _selectedIndex = 3;
+                        });
+                      });
+                }),
+                IconButton(
+                    icon: Icon(
+                      _selectedIndex == 4
+                          ? CustomIcons.user_1
+                          : CustomIcons.user,
+                      size: 20,
+                      color: secondBlack,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _selectedIndex = 4;
+                      });
+                    }),
+              ],
+            ),
           ),
         ));
   }

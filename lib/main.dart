@@ -1,5 +1,6 @@
 import 'package:demo_git/features/setting/bloc/locale_state.dart';
 import 'package:demo_git/features/splash/ui/splash_page.dart';
+import 'package:demo_git/firebase_options.dart';
 import 'package:demo_git/shared/bloc/simple_bloc_observer.dart';
 import 'package:demo_git/repository/user_repository.dart';
 import 'package:demo_git/data/local/app_preference.dart';
@@ -14,10 +15,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'features/authentication/bloc/authentication/authentication_cubit.dart';
 import 'features/setting/bloc/locale_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   Bloc.observer = SimpleBlocObserver();
   final String lang = await AppPreferences.getLanguage();
   runApp(MyApp(

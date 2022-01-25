@@ -80,150 +80,152 @@ class _CommentWidgetState extends State<CommentWidget> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        BlocProvider(
-                          create: (context) => LikeCubit(_userRepository),
-                          child: PostCardWidget(
-                            post: widget?.post,
-                            postUser: widget.postUser,
-                            userr: widget.userr,
-                            notificationn: widget.notificationn,
-                            border: false,
-                            goComment: false,
-                            goProfile: false,
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        BlocBuilder<CommentCubit, CommentState>(
-                            builder: (context, commentState) {
-                          if (commentState is CommentStateSuccess) {
-                            final List<DocumentSnapshot> comments =
-                                commentState.comments;
-                            return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: comments?.length ?? 0,
-                              itemBuilder: (context, index) {
-                                final Comment comment =
-                                    Comment.fromDoc(comments[index]);
-                                return CommentCardWidget(
-                                  comment: comment,
-                                );
-                              },
-                            );
-                          }
-                          return Container();
-                        }),
-                      ],
-                    ),
-                  ],
+                          BlocProvider(
+                            create: (context) => LikeCubit(_userRepository),
+                            child: PostCardWidget(
+                              post: widget?.post,
+                              postUser: widget.postUser,
+                              userr: widget.userr,
+                              notificationn: widget.notificationn,
+                              border: false,
+                              goComment: false,
+                              goProfile: false,
+                            ),
+                          ),
+                          BlocBuilder<CommentCubit, CommentState>(
+                              builder: (context, commentState) {
+                            if (commentState is CommentStateSuccess) {
+                              final List<DocumentSnapshot> comments =
+                                  commentState.comments;
+                              return ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: comments?.length ?? 0,
+                                itemBuilder: (context, index) {
+                                  final Comment comment =
+                                      Comment.fromDoc(comments[index]);
+                                  return CommentCardWidget(
+                                    comment: comment,
+                                  );
+                                },
+                              );
+                            }
+                            return Container();
+                          }),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Center(
-                        child: Theme(
-                          data: ThemeData(
-                              primaryColor: Colors.grey.withOpacity(0.5)),
-                          child: TextFormField(
-                            onChanged: (text) {
-                              _enable.value = text.isNotEmpty;
-                            },
-                            controller: _commentController,
-                            minLines: 1,
-                            maxLines: 3,
-                            autofocus: true,
-                            cursorColor: primaryColor,
-                            style: const TextStyle(fontSize: 12),
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              isDense: true,
-                              errorStyle: const TextStyle(height: 0),
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20),
+              Container(
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Center(
+                          child: Theme(
+                            data: ThemeData(
+                                primaryColor: Colors.grey.withOpacity(0.5)),
+                            child: TextFormField(
+                              onChanged: (text) {
+                                _enable.value = text.isNotEmpty;
+                              },
+                              controller: _commentController,
+                              minLines: 1,
+                              maxLines: 3,
+                              autofocus: true,
+                              cursorColor: primaryColor,
+                              style: const TextStyle(fontSize: 12),
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                isDense: true,
+                                errorStyle: const TextStyle(height: 0),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20)),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        const BorderSide(color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(20)),
+                                hintText: text.add_comment,
+                                hintStyle: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.withOpacity(0.8)),
                               ),
-                              errorBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(20)),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(20)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(20)),
-                              hintText: text.add_comment,
-                              hintStyle: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey.withOpacity(0.8)),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  ValueListenableBuilder(
-                      valueListenable: _enable,
-                      builder: (context, value, _) {
-                        return InkWell(
-                            onTap: () {
-                              if (value) {
-                                _commentCubit.comment(
-                                    notiId: notiId,
-                                    uid: widget.post?.user?.uid ??
-                                        widget.userr?.uid ??
-                                        widget.notificationn.userPull.uid,
-                                    post: widget?.post,
-                                    postId: widget?.post?.id ??
-                                        widget?.postUser?.id ??
-                                        widget.notificationn.postId,
-                                    comment: _commentController.text);
-                                _commentController.clear();
-                                unfocus(context);
-                                _enable.value = false;
-                                notiId = const Uuid().v4();
-                              }
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                  top: 10, bottom: 10, right: 20),
-                              height: 35,
-                              width: 35,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: value ? primaryColor : Colors.grey),
-                              child: const Icon(
-                                CustomIcons.send,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ));
-                      })
-                ],
+                    ValueListenableBuilder(
+                        valueListenable: _enable,
+                        builder: (context, value, _) {
+                          return InkWell(
+                              onTap: () {
+                                if (value) {
+                                  _commentCubit.comment(
+                                      notiId: notiId,
+                                      uid: widget.post?.user?.uid ??
+                                          widget.userr?.uid ??
+                                          widget.notificationn.userPull.uid,
+                                      post: widget?.post,
+                                      postId: widget?.post?.id ??
+                                          widget?.postUser?.id ??
+                                          widget.notificationn.postId,
+                                      comment: _commentController.text);
+                                  _commentController.clear();
+                                  unfocus(context);
+                                  _enable.value = false;
+                                  notiId = const Uuid().v4();
+                                }
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                    top: 10, bottom: 10, right: 20),
+                                height: 35,
+                                width: 35,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: value ? primaryColor : Colors.grey),
+                                child: const Icon(
+                                  CustomIcons.send,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ));
+                        })
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

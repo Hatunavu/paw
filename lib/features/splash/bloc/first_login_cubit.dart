@@ -8,7 +8,7 @@ class FirstLoginCubit extends Cubit<FirstLoginState> {
   FirstLoginCubit(this._userRepository) : super(FirstLoginStateInitial());
   Future<void> started() async {
     final bool isFirstLogin = await AppPreferences.isFirstLogin();
-    if (isFirstLogin) {
+    if (isFirstLogin == true) {
       emit(FirstLoginStateTrue());
     } else {
       emit(FirstLoginStateFalse());
